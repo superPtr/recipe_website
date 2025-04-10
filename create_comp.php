@@ -114,7 +114,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     <form action="" method="POST">
         <div class="form-group">
             <label for="competition_name">Competition Name</label>
-            <input type="text" name="competition_name" required minlength="3" maxlength="250">
+            <input type="text" name="competition_name" minlength="3" maxlength="250" required>
         </div>
 
         <div class="form-group">
@@ -124,13 +124,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
         <div class="form-group">
             <label for="start_time">Start at:</label>
-            <input type="datetime-local" name="start_time" requried>
+            <input type="datetime-local" name="start_time" required>
         </div>
 
 
         <div class="form-group">
             <label for="end_time">End at:</label>
-            <input type="datetime-local" name="end_time" requried> 
+            <input type="datetime-local" name="end_time" required> 
         </div>
 
         <div class="form-group">
