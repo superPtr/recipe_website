@@ -38,11 +38,10 @@ $recipe_amount = mysqli_num_rows($retrieve_recipe_result);
     </select>
 </div>
 
-<div id="recipeDetails">
-    <!-- Recipe details will be loaded here -->
-</div>
 
-<form action="" method="post">
+<form action="submit_recipe.php" method="post">
+    <div id="recipeDetails"></div>
+    <!-- Recipe details will be loaded here -->
     <button type="submit">Submit</button>
 </form>
 
@@ -64,17 +63,6 @@ $(document).ready(function() {
         }
     });
 });
-
-function submitRecipe() {
-    $.ajax({
-        url: 'submit_recipe.php', // Create this file
-        type: 'POST',
-        data: $('#editRecipeForm').serialize(),
-        success: function(response) {
-            alert(response); // Show a message to the user
-        }
-    });
-}
 </script>
 
 </body>
