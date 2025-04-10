@@ -13,7 +13,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 <h3><?php echo htmlspecialchars($recipe['recipe_name']); ?></h3>
 <form id="editRecipeForm">
     <label for="ingredient">Ingredients:</label><br>
-    <textarea id="ingredient" name="ingredient" rows="4" cols="50"><?php echo htmlspecialchars($recipe['ingredient']); ?></textarea><br><br>
+    <textarea id="ingredient" name="ingredient" rows="4" cols="50"><?php echo htmlspecialchars($recipe['ingredients']); ?></textarea><br><br>
 
     <label for="steps">Steps:</label><br>
     <textarea id="steps" name="steps" rows="4" cols="50"><?php echo htmlspecialchars($recipe['steps']); ?></textarea><br><br>
