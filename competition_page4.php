@@ -32,9 +32,9 @@ $row = mysqli_fetch_assoc($result);
 
 $competition_name = $row['competition_name'];
 $description      = $row['description'];
-$start_date_raw   = $row['start_date'];
+$start_date_raw   = $row['start_time'];
 $start_date       = date("Y-m-d", strtotime($start_date_raw));
-$end_date_raw     = $row['end_date'];
+$end_date_raw     = $row['end_time'];
 $end_date         = date("Y-m-d", strtotime($end_date_raw));
 $allowRegister    = $row['allowRegister'];
 $status           = $row['status']; // Get the competition status
