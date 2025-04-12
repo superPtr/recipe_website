@@ -2,7 +2,20 @@
 session_start();
 require('db.php');
 
-// check if user is logged in (authentication)
+// Check if user is not logged in as admin
+if (!isset($_SESSION['admin_id']) || !isset($_SESSION['admin_login']) || $_SESSION['admin_login'] !== true) {
+    header("Location: admin_login.php");
+    exit();
+}
+
+// Check session timeout (30 minutes)
+if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 1800)) {
+    session_unset();
+    session_destroy();
+    header("Location: admin_login.php?timeout=1");
+    exit();
+}
+$_SESSION['last_activity'] = time(); // Update last activity timestamp
 
 // validate
 if ($_SERVER["REQUEST_METHOD"] != "GET") {

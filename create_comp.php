@@ -1,6 +1,23 @@
 <?php
 require('db.php');
 
+session_start(); // Start the session
+
+// Check if user is not logged in as admin
+if (!isset($_SESSION['admin_login']) || $_SESSION['admin_login'] !== true) {
+    header("Location: admin_login.php"); // Redirect to login page
+    exit();
+}
+
+// Check session timeout
+if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 1800)) {
+    session_unset();
+    session_destroy();
+    header("Location: admin_login.php?timeout=1");
+    exit();
+}
+$_SESSION['last_activity'] = time(); // Update last activity time stamp
+
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     if(isset($_POST['createComp'])){
         try{
@@ -34,12 +51,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Competition</title>
+    <title>Admin - Create Competition</title>
     <style>
         form {
             max-width: 600px;
             margin: 20px auto;
             padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
         }
 
         .page-heading {
@@ -55,13 +74,17 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             margin: 20px auto;
             text-align: center;
         }
+
         .form-group {
             margin-bottom: 15px;
         }
+
         label {
             display: block;
             margin-bottom: 5px;
+            font-weight: 500; /* Add this for better readability */
         }
+
         input[type="text"],
         input[type="datetime-local"],
         select,
@@ -71,7 +94,18 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             margin-bottom: 10px;
             border: 1px solid #ddd;
             border-radius: 4px;
+            box-sizing: border-box; /* Add this to prevent overflow */
         }
+
+        input[type="text"]:focus,
+        input[type="datetime-local"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76,175,80,0.2);
+        }
+
         input[type="submit"] {
             background-color: #4CAF50;
             color: white;
@@ -79,27 +113,59 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            width: auto;
+            font-size: 16px; /* Add this for better readability */
         }
+
         input[type="submit"]:hover {
             background-color: #45a049;
         }
+
         .button-container {
             text-align: center;
             margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
         }
+
+        .btn-cancel {
+            background-color: #f44336;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px; /* Match submit button */
+        }
+
+        .btn-cancel:hover {
+            background-color: #d32f2f;
+        }
+
         .success {
-            color: green;
-            background-color: #dff0d8;
+            color: #155724;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
             padding: 10px;
             margin: 10px 0;
             border-radius: 4px;
         }
+
         .error {
-            color: red;
-            background-color: #f2dede;
+            color: #721c24;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
             padding: 10px;
             margin: 10px 0;
             border-radius: 4px;
+        }
+
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
         }
     </style>
 </head>
@@ -152,6 +218,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
         <div class="button-container">
             <input type="submit" name="createComp" value="Create Competition">
+            <a href="admin_dashboard.php" class="btn-cancel">Cancel</a>
         </div>
     </form>
     
