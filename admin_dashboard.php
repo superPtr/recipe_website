@@ -128,7 +128,7 @@ $_SESSION['last_activity'] = time(); // Update last activity timestamp
             </a>
 
             <!-- View Competition List Card -->
-            <a href="view_comp5.php" class="menu-item view">
+            <a href="view_comp.php" class="menu-item view">
                 <div class="menu-icon">📋</div>
                 <div class="menu-title">View Competition List</div>
                 <div class="menu-description">View and manage existing competitions</div>
