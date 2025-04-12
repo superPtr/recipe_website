@@ -30,7 +30,7 @@ function formatDateTime($datetime){
 // validate
 if (!isset($_GET['comp_id']) || !is_numeric($_GET['comp_id'])) {
     $_SESSION['error'] = "Invalid competition ID";
-    header("Location: view_comp5.php");
+    header("Location: view_comp.php");
     exit();
 }
 
@@ -75,7 +75,7 @@ $get_query_result = mysqli_query($con, $get_query);
 
 if(!$result_row = mysqli_fetch_assoc($get_query_result)){
     $_SESSION['error'] = "Competition not found!";
-    header("Location: view_comp5.php");
+    header("Location: view_comp.php");
     exit();
 }
 ?>
@@ -213,7 +213,7 @@ if(!$result_row = mysqli_fetch_assoc($get_query_result)){
             setTimeout(function() {
                 document.getElementById('successMessage').style.opacity = '0';
                 setTimeout(function(){
-                    window.location.href = 'view_comp5.php';
+                    window.location.href = 'view_comp.php';
                 }, 500);
             }, 2000);
         </script>
@@ -281,7 +281,7 @@ if(!$result_row = mysqli_fetch_assoc($get_query_result)){
 
         <div class="button-container">
             <input type="submit" name="updateComp" value="Update">
-            <a href="view_comp5.php" class="btn-cancel">Cancel</a>
+            <a href="view_comp.php" class="btn-cancel">Cancel</a>
         </div>
     </form>
 

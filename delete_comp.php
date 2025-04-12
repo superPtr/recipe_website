@@ -19,13 +19,13 @@ $_SESSION['last_activity'] = time(); // Update last activity timestamp
 
 // validate
 if ($_SERVER["REQUEST_METHOD"] != "GET") {
-    header("Location: view_comp5.php");
+    header("Location: view_comp.php");
     exit();
 }
 
 if (!isset($_GET['comp_id']) || empty($_GET['comp_id'])) {
     $_SESSION['error'] = "Invalid competition ID";
-    header("Location: view_comp5.php");
+    header("Location: view_comp.php");
     exit();
 }
 
@@ -43,6 +43,6 @@ try{
     $_SESSION['del_error'] = "Database error occurred";
 }
 
-header("Location: view_comp5.php");
+header("Location: view_comp.php");
 exit();
 ?>
