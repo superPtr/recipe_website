@@ -128,10 +128,15 @@ if(!$result_row = mysqli_fetch_assoc($get_query_result)){
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         input[type="submit"]:hover {
             background-color: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
         .button-container {
@@ -143,18 +148,23 @@ if(!$result_row = mysqli_fetch_assoc($get_query_result)){
         }
 
         .btn-cancel {
-            background-color: #dc3545; /* Red color for cancel */
+            background-color: #dc3545;
             color: white;
             padding: 10px 20px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            text-decoration: none; /* Remove underline from link */
-            display: inline-block; /* Make it look like a button */
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 14px;
         }
         
         .btn-cancel:hover {
-            background-color: #c82333; /* Darker red on hover */
+            background-color: #c82333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
         .error {

@@ -208,6 +208,22 @@ if(!$result){
             visibility: visible;
             opacity: 1;
         }
+
+        .dashboard-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #2196F3;
+            color: #FFFFFF;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .dashboard-btn:hover {
+            background-color: #1976D2;
+        }
+
         .success-message {
             padding: 10px;
             margin: 10px 0;
@@ -299,8 +315,8 @@ if(!$result){
     <div class="table-container">
         <h1 class="heading">Competitions</h1>
 
-        <div style="margin-bottom: 20px; text-align: right;">
-            <a href="admin_dashboard.php" class="btn" style="background-color: #2196F3;">Back to Dashboard</a>
+        <div style="text-align: right;">
+            <a href="admin_dashboard.php" class="dashboard-btn">Back to Dashboard</a>
         </div>
 
         <table class="table">
