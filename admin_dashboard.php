@@ -138,7 +138,6 @@ $_SESSION['last_activity'] = time(); // Update last activity timestamp
             <a href="javascript:void(0);" onclick="confirmLogout();" class="menu-item logout">
                 <div class="menu-icon">🚪</div>
                 <div class="menu-title">Logout</div>
-                <div class="menu-description">Securely log out from the admin panel</div>
             </a>
         </div>
     </div>
