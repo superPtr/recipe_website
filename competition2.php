@@ -8,6 +8,8 @@ require('db.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Competition Page</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
     <style>
         body {
             width: 100%;
@@ -20,7 +22,7 @@ require('db.php');
         }
 
         .container {
-            width: 500px;
+            width: 100%;
             height: 300px;
             display: flex;
             position: relative;
@@ -54,6 +56,8 @@ require('db.php');
             position: absolute;
             top: 50px;
             left: 0;
+            width: 100%;
+            min-height: 300px;
             background: #ffffff;
             color: #000000;
             font-family: poppins;
@@ -87,52 +91,66 @@ require('db.php');
         <input type="radio" name="option" id="1" checked/>
         <label for="1">
             <div class="tab-name">Upcoming</div>
-            <div id="upcoming" class="tab-content"></div>
+            <div id="upcoming" class="tab-content">
+                <section class="service">
+                    <div id="upcoming_element" class="wrapper"></div>
+                </section>
+            </div>
         </label>
 
-        <input type="radio" name="option" id="2" checked/>
+        <input type="radio" name="option" id="2"/>
         <label for="2">
             <div class="tab-name">On Going</div>
-            <div id="ongoing" class="tab-content"></div>
+            <div id="ongoing" class="tab-content">
+                <section class="service">
+                    <div id="ongoing_element" class="wrapper"></div>
+                </section>
+            </div>
         </label>
 
-        <input type="radio" name="option" id="3" checked/>
+        <input type="radio" name="option" id="3"/>
         <label for="3">
             <div class="tab-name">Completed</div>
-            <div id="completed" class="tab-content"></div>
+            <div id="completed" class="tab-content">
+                <section class="service">
+                    <div id="completed_element" class="wrapper"></div>
+                </section>
+            </div>
         </label>
     </div>
 
     <script>
         // Get competitions data from PHP
         const competitions = <?php echo json_encode($competitions); ?>;
-        console.log(competitions);
         
         // Function to organize and display competitions
         function organizeCompetitions() {
             // Clear existing content
-            document.getElementById('upcoming').innerHTML = '';
-            document.getElementById('ongoing').innerHTML = '';
-            document.getElementById('completed').innerHTML = '';
+            document.getElementById('upcoming_element').innerHTML = '';
+            document.getElementById('ongoing_element').innerHTML = '';
+            document.getElementById('completed_element').innerHTML = '';
 
             // Sort competitions by status
             competitions.forEach(competition => {
-                const competitionElement = document.createElement('div');
-                competitionElement.className = 'competition-entry';
+                let competitionElement = document.createElement('div');
+                competitionElement.className = 'box';
+
                 competitionElement.innerHTML = `
-                    <p class="comp-name">${competition.competition_name}</p>
-                    <!-- Add more competition details as needed -->
+                    <i class='bx bx-baguette'></i>
+                    <h2>${competition.competition_name}</h2>
+                    <p>${competition.description || ''}</p>
+                    <a href="competition_page4.php?comp_id=${competition.competition_id}" class="btn">Read More</a>
                 `;
 
-                switch(competition.status) {
+                switch(competition.status.toLowerCase()) {
                     case 'upcoming':
-                        document.getElementById('upcoming').appendChild(competitionElement);
+                        document.getElementById('upcoming_element').appendChild(competitionElement);
                         break;
                     case 'ongoing':
-                        document.getElementById('ongoing').appendChild(competitionElement);
+                        document.getElementById('ongoing_element').appendChild(competitionElement);
                         break;
                     case 'completed':
-                        document.getElementById('completed').appendChild(competitionElement);
+                        document.getElementById('completed_element').appendChild(competitionElement);
                         break;
                 }
             });

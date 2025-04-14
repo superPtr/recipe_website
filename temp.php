@@ -62,3 +62,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 header('Content-Type: application/json');
 echo json_encode($response);
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE IF NOT EXISTS votes (
+    vote_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    recipe_id INT NOT NULL,
+    competition_id INT NOT NULL,
+    voted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY unique_vote (user_id, competition_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (recipe_id) REFERENCES competition_recipes(compRecipe_id),
+    FOREIGN KEY (competition_id) REFERENCES competitions(competition_id)
+);

@@ -1,5 +1,36 @@
 <?php
 require('db.php');
+
+function updateCompetitionStatuses($con) {
+    $current_time = date('Y-m-d H:i:s');
+    
+    $sql = "UPDATE competitions 
+            SET 
+            status = CASE
+                WHEN '$current_time' < start_time THEN 'upcoming'
+                WHEN '$current_time' >= start_time AND '$current_time' < end_time THEN 'ongoing'
+                WHEN '$current_time' >= end_time THEN 'completed'
+            END,
+            allowRegister = CASE
+                WHEN '$current_time' < start_time THEN 1
+                ELSE 0
+            END";
+    
+    return mysqli_query($con, $sql);
+}
+
+// Update statuses before fetching competitions
+updateCompetitionStatuses($con);
+
+// Fetch all competitions and convert to JSON for JavaScript
+$query = "SELECT * FROM competitions";
+    $result = mysqli_query($con, $query);
+    $competitions = [];
+    
+    while ($row = mysqli_fetch_assoc($result)) {
+        $competitions[] = $row;
+    }
+
 ?>
 
 <!DOCTYPE html>
